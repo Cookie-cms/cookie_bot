@@ -1,13 +1,19 @@
 import disnake
 import os
-from config import TOKEN
 from disnake.ext import commands
 import embed as embeds
+import yaml
+import os
 
-# from mysql import cursor
 
-bot = commands.InteractionBot(intents=disnake.Intents.all())
-# logging.basicConfig(level=logging.INFO)
+
+with open('config.yml') as f:
+    config = yaml.load(f, Loader=yaml.FullLoader)
+
+
+bot = commands.InteractionBot(intents=disnake.Intents.all(), test_guilds=[800783670742745108])
+
+
 @bot.event
 async def on_ready():
     print("The bot is ready!")
@@ -24,7 +30,6 @@ async def on_slash_command_error(inter, error):
 ignored_files = ['']
 
 
-import os
 
 def load_extensions_from_directory(directory):
     ignored_files = []  # Убедитесь, что у вас есть этот список или определите его заранее
@@ -37,9 +42,8 @@ def load_extensions_from_directory(directory):
             except Exception as e:
                 print(f'Skipped loading extension {extension_path}: {str(e)}')
 
-# Specify the directory where extensions are located
+
 extension_directory = 'modules'
 load_extensions_from_directory(extension_directory)
 
-# bot.load_extension('modules.utils.profile')
-bot.run(TOKEN)
+bot.run(config['token'])

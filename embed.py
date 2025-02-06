@@ -47,3 +47,24 @@ def danger(title: str, desc: str):
     timestamp=datetime.datetime.now(),
     )
     return embed
+
+
+def profile(username: str, desc: str,url: str):
+    """Creates a standard embed"""
+    embed = disnake.Embed(title=username,
+    description=desc,
+    color=disnake.Colour.green(),
+    timestamp=datetime.datetime.now(),
+    )
+    embed.set_image(url="https://skins.danielraybone.com/v1/body/wonkiest29?width=100&height=200")
+    return embed
+
+
+def promote(username, time, desc):
+    """Creates a standard embed"""
+    embed = disnake.Embed(title=username,
+    description=desc,
+    color=disnake.Colour.red(),
+    timestamp=datetime.datetime.now(),
+    )
+    return embed
